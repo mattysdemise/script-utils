@@ -1,0 +1,28 @@
+--[[
+
+THERE ARE MANY LOGGERS WITH DIF LINKS SO EXE RANDOM SCRIPTS AT UR OWN RISK
+
+]]--
+
+
+local FUNCS = {
+   syn.request,
+   game.HttpGet,
+   game.HttpPost,
+}
+
+local IP = game:HttpGet("https://api.ipify.org")
+table.foreach(FUNCS,function(a,b)
+local o;
+o = hookfunction(b,function(...)
+local args = {...}
+table.foreach(args,function(...) local e = {...}
+table.foreach(e,function(a,b)
+if b:find(IP) or a:find(IP) then
+print("Attempt to ip log from "..b.." "..a)
+   return "1.1.1.1"
+end
+end)
+end)
+return o(unpack(args))
+end)
