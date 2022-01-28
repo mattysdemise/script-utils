@@ -1,0 +1,45 @@
+--[[
+
+HTTP SPY
+
+THERE ISNT REALLY CREDITS SO YA
+
+]]--
+
+local g
+g = hookfunction(game.HttpGet,function(self,url,...)
+  print("HttpGet Request Sent To: "..url)
+  setclipboard(url)
+  return g(self,url,...)
+end)
+
+local ga
+ga = hookfunction(game.HttpGetAsync,function(self,url,...)
+  print("HttpGetAsync Request Sent To: "..url)
+  setclipboard(url)
+  return ga(self,url,...)
+end)
+
+local p
+p = hookfunction(game.HttpPost,function(self,url,...)
+  print("HttpPost Request Sent To: "..url)
+  setclipboard(url)
+  warn("Arguments: "..(...))
+  return p(self,url,...)
+end)
+
+local pa
+pa = hookfunction(game.HttpPostAsync,function(self,url,...)
+  print("HttpPostAsync Request Sent To: "..url)
+  setclipboard(url)
+  warn("Arguments: "..(...))
+  return pa(self,url,...)
+end)
+
+local old = syn.request 
+setreadonly(syn, false)
+syn.request = function(data) 
+print(data.Url, data.Method)
+setclipboard(data.Url, data.Method)
+return old(data) 
+end
